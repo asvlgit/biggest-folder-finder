@@ -3,10 +3,10 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ParametersBag {
-    private long limit;
-    private String path;
+    private final long limit;
+    private final String path;
 
-    public ParametersBag(String args[]) {
+    public ParametersBag(String[] args) {
         Map<String, String> parameters = new HashMap<>();
         for (int i = 0; i < args.length; i += 2) {
             parameters.put(args[i], args[i + 1]);
@@ -18,9 +18,7 @@ public class ParametersBag {
         try {
             limit = SizeCalculator.displaySizeToByte(Optional
                     .ofNullable(parameters.get("-l"))
-                    .orElseThrow(() -> {
-                        throw new IllegalArgumentException("Не указан лимит объема папки");
-                    }));
+                    .orElseThrow(() -> new IllegalArgumentException("Не указан лимит объема папки")));
             if (limit < 0) {
                 throw new IllegalArgumentException("Лимит объема папки должен быть положительным");
             }

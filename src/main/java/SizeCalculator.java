@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class SizeCalculator {
-    private static Map<String, Long> dimensionSize;
+    private static final Map<String, Long> dimensionSize;
 
     static {
         dimensionSize = new HashMap<>();

@@ -1,11 +1,9 @@
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.util.ArrayList;
 
 public class Node {
-    private File folder;
-    private ArrayList<Node> children;
+    private final File folder;
+    private final ArrayList<Node> children;
     private long size;
     private int level = 0;
     private long limit;
@@ -56,10 +54,10 @@ public class Node {
         StringBuilder builder = new StringBuilder();
         String size = SizeCalculator.byteToDisplaySize(getSize());
 
-        builder.append((folder.isDirectory() ? "+ " : "- ") + folder.getName() + " - " + size + "\n");
+        builder.append(folder.isDirectory() ? "+ " : "- ").append(folder.getName()).append(" - ").append(size).append("\n");
         getChildren().stream()
                 .filter(c -> c.getSize() >= limit)
-                .forEach(c -> builder.append(" ".repeat(level + 1)).append(c.toString()));
+                .forEach(c -> builder.append(" ".repeat(level + 1)).append(c));
 
         return builder.toString();
     }
